@@ -1,3 +1,38 @@
 page-home {
 
+  .home {
+    background: #0052cc;
+  }
+
+  .login {
+    background: #0065ff;
+    font-weight: bold;
+  }
+
+  ion-grid {
+    height: 100%;
+  }
+
+  .centering {
+    height: 100%;
+    align-content: center;
+    align-items: center;
+  }
+
+  p {
+    text-align: center;
+    font-size: 4rem;
+    color: #fff;
+  }
+
+  ion-input {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 30px;
+  }
+
+  .jira-logo {
+    margin: auto;
+    display: block;
+  }
 }
