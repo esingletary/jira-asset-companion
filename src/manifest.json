@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Jira Asset Companion",
+  "short_name": "JAC",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
