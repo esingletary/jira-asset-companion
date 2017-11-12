@@ -18,7 +18,7 @@ export class LoginPage {
     private jiraAPI: JiraApiProvider,
     private formBuilder: FormBuilder
   ) {
-    this.form = formBuilder.group({
+    this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
@@ -34,7 +34,7 @@ export class LoginPage {
         this.name = data['displayName'];
       }, err => {
         this.name = 'Incorrect username or password';
-      })
+      });
     } else {
       console.log('Form is invalid!');
     }
