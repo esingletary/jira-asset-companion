@@ -2,5 +2,7 @@
   "name": "Jira Asset Companion",
   "app_id": "26c7209c",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
