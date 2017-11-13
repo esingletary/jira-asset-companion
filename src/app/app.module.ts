@@ -4,34 +4,41 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorHandler, NgModule } from '@angular/core';
 
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { App } from './app.component';
 import { LoginPage } from '../pages/login/login';
+import { SearchPage } from '../pages/search/search'
 import { JiraApiProvider } from '../providers/jira-api/jira-api';
+import { AuthProvider } from '../providers/auth/auth';
 
 @NgModule({
   declarations: [
     App,
-    LoginPage
+    LoginPage,
+    SearchPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    IonicModule.forRoot(App)
+    IonicModule.forRoot(App),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     App,
-    LoginPage
+    LoginPage,
+    SearchPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    JiraApiProvider
+    JiraApiProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}

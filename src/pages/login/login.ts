@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
 import { JiraApiProvider } from '../../providers/jira-api/jira-api';
+import { AuthProvider } from '../../providers/auth/auth';
+
+import { SearchPage } from '../search/search';
+
+import { User } from '../../models/user';
 
 @Component({
   selector: 'page-login',
@@ -10,13 +16,14 @@ import { JiraApiProvider } from '../../providers/jira-api/jira-api';
 export class LoginPage {
 
   private form : FormGroup;
-  user : any;
-  name : string;
+  user : User;
+  errors : string;
 
   constructor(
     public navCtrl: NavController,
     private jiraAPI: JiraApiProvider,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private auth : AuthProvider
   ) {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
@@ -24,19 +31,28 @@ export class LoginPage {
     });
   }
 
-  onLoginSubmit() {
+  public onLoginSubmit() : void {
     if (this.form.valid) {
-      this.user = {
-        username: this.form.get('username').value,
-        password: this.form.get('password').value
-      }
-      this.jiraAPI.authenticateUser(this.user.username, this.user.password).subscribe(data => {
-        this.name = data['displayName'];
+      this.jiraAPI.authenticateUser(this.form.get('username').value, this.form.get('password').value).subscribe(
+        data => {
+          this.errors = null;
+          this.user = {
+            name: data['name'],
+            email: data['emailAddress'],
+            avatarURL: data["avatarUrls"]["48x48"],
+            displayName: data['displayName']
+          }
+          this.auth.storeCredentials(this.form.get('username'), this.form.get('password'));
+          this.moveToMainPage(this.user);
       }, err => {
-        this.name = 'Incorrect username or password';
+        this.errors = 'Invalid username or password';
       });
     } else {
-      console.log('Form is invalid!');
+      this.errors = 'Please enter a username and password';
     }
+  }
+
+  public moveToMainPage(user) : void {
+    this.navCtrl.push(SearchPage, user);
   }
 }

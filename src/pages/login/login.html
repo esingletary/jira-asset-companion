@@ -3,12 +3,12 @@
     <ion-row class="centering">
       <ion-col>
           <img class="jira-logo" width="125" height="152" src="assets/imgs/jira-core-logo.png"/>
-          <p>Asset Companion</p>
+          <p class="header">Asset Companion</p>
           <form [formGroup]="form" (submit)="onLoginSubmit()">
+            <p class="errors">{{errors}}</p>
             <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>
             <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
             <button ion-button full class="login-button" type="submit">Log in</button>
-            {{name}}
         </form>
       </ion-col>
     </ion-row>
