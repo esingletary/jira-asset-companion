@@ -12,7 +12,7 @@ export class AuthProvider {
 
   public storeCredentials(username : string, password : string) : void {
     let credentials = btoa(username +':::'+ password);
-    this.storage.set('authString', this.authString);
+    this.storage.set('authString', credentials);
   }
 
   public cacheCredentials(username : string, password : string) : void {
