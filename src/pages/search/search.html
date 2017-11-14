@@ -9,5 +9,8 @@
     <ion-item>{{user.displayName}}</ion-item>
     <ion-item>{{user.name}}</ion-item>
     <ion-item>{{user.email}}</ion-item>
+    <form (submit)="onLogoutSubmit()">
+      <button ion-button type="submit">Log out</button>
+    </form>
   </ion-list>
 </ion-content>

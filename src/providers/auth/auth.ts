@@ -5,40 +5,40 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class AuthProvider {
 
-  authString : string;
+  private authString : string;
 
   constructor(public http: HttpClient, private storage: Storage) {
   }
 
-  public storeCredentials(username, password) : void {
-    this.authString = btoa(username +':::'+ password);
+  public storeCredentials(username : string, password : string) : void {
+    let credentials = btoa(username +':::'+ password);
     this.storage.set('authString', this.authString);
   }
 
-  public cacheCredentials(username, password) {
-    this.authString = btoa(username +':::'+ password);
+  public cacheCredentials(username : string, password : string) : void {
+    this.authString = btoa(username +':'+ password);
     localStorage.setItem('authString', this.authString);
   }
 
-  public isAuthenticated() {
+  public isAuthenticated() : boolean {
     return this.authString != null;
   }
 
-  public getAuthString() {
+  public getAuthString() : string {
     return this.authString;
   }
 
-  public loadAuthString() {
+  public loadAuthString() : Promise<string> {
     return new Promise((resolve, reject) => {
       this.storage.get('authString')
       .then((val) => {
         this.authString = val;
-        resolve('loaded!')
+        resolve('loaded!');
       })
     })
   }
 
-  public destroyAuth() {
+  public destroyAuth() : void {
     localStorage.clear();
     this.storage.clear();
     this.authString = null;

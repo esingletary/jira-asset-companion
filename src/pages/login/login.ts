@@ -36,8 +36,7 @@ export class LoginPage {
             password: credentials[1],
             remember: true
           });
-        } else {
-          console.log('not authenticated!');
+          credentials = null;
         }
       });
   }
@@ -56,7 +55,8 @@ export class LoginPage {
           if (!this.auth.isAuthenticated() && this.form.get('remember').value === true) {
             this.auth.storeCredentials(this.form.get('username').value, this.form.get('password').value);
           }
-          this.auth.cacheCredentials(this.form.get('username').value, this.form.get('password').value)
+          this.auth.cacheCredentials(this.form.get('username').value, this.form.get('password').value);
+          this.form.reset();
           this.moveToMainPage(this.user);
       }, err => {
         console.log(this.form.get('password').value)
