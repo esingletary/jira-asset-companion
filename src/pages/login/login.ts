@@ -19,16 +19,27 @@ export class LoginPage {
   user : User;
   errors : string;
 
-  constructor(
-    public navCtrl: NavController,
-    private jiraAPI: JiraApiProvider,
-    private formBuilder: FormBuilder,
-    private auth : AuthProvider
+  constructor(public navCtrl: NavController, private jiraAPI: JiraApiProvider, private formBuilder: FormBuilder, private auth : AuthProvider
   ) {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      remember: ['false']
     });
+    localStorage.clear();
+    auth.loadAuthString()
+      .then(() => {
+        if (auth.isAuthenticated()) {
+          let credentials = atob(auth.getAuthString()).split(':::');
+          this.form.patchValue({
+            username: credentials[0],
+            password: credentials[1],
+            remember: true
+          });
+        } else {
+          console.log('not authenticated!');
+        }
+      });
   }
 
   public onLoginSubmit() : void {
@@ -42,9 +53,13 @@ export class LoginPage {
             avatarURL: data["avatarUrls"]["48x48"],
             displayName: data['displayName']
           }
-          this.auth.storeCredentials(this.form.get('username'), this.form.get('password'));
+          if (!this.auth.isAuthenticated() && this.form.get('remember').value === true) {
+            this.auth.storeCredentials(this.form.get('username').value, this.form.get('password').value);
+          }
+          this.auth.cacheCredentials(this.form.get('username').value, this.form.get('password').value)
           this.moveToMainPage(this.user);
       }, err => {
+        console.log(this.form.get('password').value)
         this.errors = 'Invalid username or password';
       });
     } else {

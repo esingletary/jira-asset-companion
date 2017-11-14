@@ -11,16 +11,24 @@ export class AuthProvider {
   }
 
   public storeCredentials(username, password) : void {
-    this.authString = btoa(username+':'+ password);
+    this.authString = btoa(username +':::'+ password);
     this.storage.set('authString', this.authString);
   }
 
+  public cacheCredentials(username, password) {
+    this.authString = btoa(username +':::'+ password);
+    localStorage.setItem('authString', this.authString);
+  }
+
   public isAuthenticated() {
-    console.log(this.authString);
     return this.authString != null;
   }
 
-  loadAuthString() {
+  public getAuthString() {
+    return this.authString;
+  }
+
+  public loadAuthString() {
     return new Promise((resolve, reject) => {
       this.storage.get('authString')
       .then((val) => {
@@ -31,7 +39,8 @@ export class AuthProvider {
   }
 
   public destroyAuth() {
-    this.storage.set('authString', null);
+    localStorage.clear();
+    this.storage.clear();
     this.authString = null;
   }
 
