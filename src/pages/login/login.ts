@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular'
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { JiraApiProvider } from '../../providers/jira-api/jira-api';
@@ -19,7 +20,7 @@ export class LoginPage {
   user : User;
   errors : string;
 
-  constructor(public navCtrl: NavController, private jiraAPI: JiraApiProvider, private formBuilder: FormBuilder, private auth : AuthProvider
+  constructor(public navCtrl: NavController, private jiraAPI: JiraApiProvider, private formBuilder: FormBuilder, private auth : AuthProvider, public loadingCtrl: LoadingController
   ) {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
@@ -43,6 +44,8 @@ export class LoginPage {
 
   public onLoginSubmit() : void {
     if (this.form.valid) {
+      let loading = this.loadingCtrl.create();
+      loading.present();
       this.jiraAPI.authenticateUser(this.form.get('username').value, this.form.get('password').value).subscribe(
         data => {
           this.errors = null;
@@ -52,6 +55,7 @@ export class LoginPage {
             avatarURL: data["avatarUrls"]["48x48"],
             displayName: data['displayName']
           }
+          loading.dismiss();
           if (!this.auth.isAuthenticated() && this.form.get('remember').value === true) {
             this.auth.storeCredentials(this.form.get('username').value, this.form.get('password').value);
           }

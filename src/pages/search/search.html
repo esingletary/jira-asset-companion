@@ -4,13 +4,12 @@
     </ion-navbar>
   </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item>{{user.displayName}}</ion-item>
-    <ion-item>{{user.name}}</ion-item>
-    <ion-item>{{user.email}}</ion-item>
+<ion-content padding>
+    <form (submit)="activateScanner()">
+        <button ion-button type="submit">Scan Code</button>
+      </form>
     <form (submit)="onLogoutSubmit()">
       <button ion-button type="submit">Log out</button>
     </form>
-  </ion-list>
+    {{data}}
 </ion-content>
