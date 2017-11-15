@@ -25,6 +25,12 @@ page-login {
     color: #fff;
   }
 
+  .md, .header {
+    text-align: center;
+    font-size: 3rem;
+    color: #fff;
+  }
+
   .errors {
     color: red;
     text-align: center;
@@ -45,5 +51,14 @@ page-login {
   .jira-logo {
     margin: auto;
     display: block;
+    height: 152px;
+    width: 125px;
+  }
+
+  .md, .jira-logo {
+    margin: auto;
+    display: block;
+    height: 120px;
+    width: 99px;
   }
 }
