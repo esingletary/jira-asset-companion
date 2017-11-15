@@ -8,6 +8,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { HeaderColor } from '@ionic-native/header-color';
 
 import { App } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -38,6 +39,7 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    HeaderColor,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     JiraApiProvider,
     AuthProvider
