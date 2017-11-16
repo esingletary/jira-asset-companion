@@ -30,25 +30,26 @@ export class SearchPage {
   ionViewDidLoad() {
   }
 
-  public onLogoutSubmit() : void {
+  public onLogoutSubmit(): void {
     this.auth.destroyAuth();
     this.navCtrl.setRoot(LoginPage,{},{animate: true, direction: 'back'});
   }
 
-  public activateScanner() : void {
+  public activateScanner(): void {
     this.barcodeScanner.scan().then((barcodeData) => {
-      this.data = this.parseUrl(barcodeData.text);
+      let scan = this.parseUrl(barcodeData.text);
+      this.data = scan;
     }, (err) => {
          this.data = err;
     });
   }
 
-  public parseUrl(url : string) : string {
+  public parseUrl(url: string): string {
     let urlArray = url.split('/');
     let prefix = urlArray[urlArray.length -1].substring(0, 4);
     console.log(prefix);
     if (prefix != 'ITAM' || prefix == null) {
-      return 'Not a Jira QR Code';
+      return 'NaN';
     } else {
       return urlArray[urlArray.length -1];
     }

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { AuthProvider } from '../auth/auth';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class JiraProvider {
@@ -11,13 +12,18 @@ export class JiraProvider {
   constructor(public http: HttpClient, public auth: AuthProvider) {
   }
 
-  public authenticateUser(username, password) {
+  public authenticateUser(username: string, password: string): Observable<Object> {
     return this.http.get(`${this.URLString}/myself`, {headers: new HttpHeaders()
     .set('Authorization', `Basic ${btoa(username+':'+password)}`)});
   }
 
-  public getListOfProjects() {
+  public getListOfProjects(): Observable<Object> {
     return this.http.get(`${this.URLString}/project`, {headers: new HttpHeaders()
+      .set('Authorization', `Basic ${this.auth.getAuthString()}`)});
+  }
+
+  public getIssue(key: string): Observable<Object> {
+    return this.http.get(`${this.URLString}/issue/${key}`, {headers: new HttpHeaders()
       .set('Authorization', `Basic ${this.auth.getAuthString()}`)});
   }
 }
