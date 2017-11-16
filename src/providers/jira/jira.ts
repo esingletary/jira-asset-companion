@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { AuthProvider } from '../auth/auth';
 
 @Injectable()
-export class JiraApiProvider {
+export class JiraProvider {
 
   URLString = 'https://support.mvnu.edu/rest/api/2';
 

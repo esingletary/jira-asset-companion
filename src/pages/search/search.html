@@ -5,6 +5,7 @@
   </ion-header>
 
 <ion-content padding>
+  <p>Hello there {{user?.displayName}}</p>
     <form (submit)="activateScanner()">
         <button ion-button type="submit">Scan Code</button>
       </form>

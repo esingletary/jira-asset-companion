@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular'
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-import { JiraApiProvider } from '../../providers/jira-api/jira-api';
+import { JiraProvider } from '../../providers/jira/jira';
 import { AuthProvider } from '../../providers/auth/auth';
 
 import { SearchPage } from '../search/search';
@@ -20,21 +20,24 @@ export class LoginPage {
   user : User;
   errors : string;
 
-  constructor(public navCtrl: NavController, private jiraAPI: JiraApiProvider, private formBuilder: FormBuilder, private auth : AuthProvider, public loadingCtrl: LoadingController
+  constructor(public navCtrl: NavController, private jira: JiraProvider, private formBuilder: FormBuilder, private auth : AuthProvider, public loadingCtrl: LoadingController
   ) {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       remember: ['false']
     });
-    localStorage.clear();
   }
 
-  public onLoginSubmit() : void {
+  public onLoginSubmit(): void {
     if (this.form.valid) {
       let loading = this.loadingCtrl.create();
       loading.present();
-      this.jiraAPI.authenticateUser(this.form.get('username').value, this.form.get('password').value).subscribe(
+
+      let username = this.form.get('username').value;
+      let password = this.form.get('password').value;
+
+      this.jira.authenticateUser(username, password).subscribe(
         data => {
           this.errors = null;
           this.user = {
@@ -45,11 +48,12 @@ export class LoginPage {
           }
           loading.dismiss();
           if (!this.auth.isAuthenticated() && this.form.get('remember').value === true) {
-            this.auth.storeCredentials(this.form.get('username').value, this.form.get('password').value);
+            this.auth.storeCredentials(username, password, this.user);
           }
-          this.auth.setAuthString(this.form.get('username').value, this.form.get('password').value);
+          this.auth.setAuthString(username, password);
+          this.auth.setUser(this.user);
           this.form.reset();
-          this.moveToMainPage(this.user);
+          this.moveToMainPage();
       }, err => {
         this.errors = 'Invalid username or password';
       });
@@ -58,7 +62,7 @@ export class LoginPage {
     }
   }
 
-  public moveToMainPage(user) : void {
-    this.navCtrl.setRoot(SearchPage, user, {animate: true, direction: 'forward'});
+  public moveToMainPage(): void {
+    this.navCtrl.setRoot(SearchPage, {}, {animate: true, direction: 'forward'});
   }
 }

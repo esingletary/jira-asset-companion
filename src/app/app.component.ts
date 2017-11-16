@@ -15,13 +15,13 @@ export class App {
   rootPage: any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, headerColor: HeaderColor, auth: AuthProvider) {
-    auth.loadAuthString().then(() => {
+    auth.loadFromStorage().then(() => {
       if (auth.isAuthenticated()) {
         this.rootPage = SearchPage;
       } else {
         this.rootPage = LoginPage;
       }
-    })
+    });
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

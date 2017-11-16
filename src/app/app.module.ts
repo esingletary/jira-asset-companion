@@ -13,7 +13,7 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { App } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { SearchPage } from '../pages/search/search'
-import { JiraApiProvider } from '../providers/jira-api/jira-api';
+import { JiraProvider } from '../providers/jira/jira';
 import { AuthProvider } from '../providers/auth/auth';
 
 @NgModule({
@@ -41,7 +41,7 @@ import { AuthProvider } from '../providers/auth/auth';
     BarcodeScanner,
     HeaderColor,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    JiraApiProvider,
+    JiraProvider,
     AuthProvider
   ]
 })
