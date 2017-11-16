@@ -59,7 +59,6 @@ export class LoginPage {
   }
 
   public moveToMainPage(user) : void {
-    this.navCtrl.push(SearchPage, user);
-    this.navCtrl.setRoot(SearchPage);
+    this.navCtrl.setRoot(SearchPage, user, {animate: true, direction: 'forward'});
   }
 }
