@@ -11,13 +11,8 @@ export class AuthProvider {
   }
 
   public storeCredentials(username : string, password : string) : void {
-    let credentials = btoa(username +':::'+ password);
+    let credentials = btoa(username +':'+ password);
     this.storage.set('authString', credentials);
-  }
-
-  public cacheCredentials(username : string, password : string) : void {
-    this.authString = btoa(username +':'+ password);
-    localStorage.setItem('authString', this.authString);
   }
 
   public isAuthenticated() : boolean {
@@ -28,12 +23,16 @@ export class AuthProvider {
     return this.authString;
   }
 
-  public loadAuthString() : Promise<string> {
-    return new Promise((resolve, reject) => {
+  public setAuthString(username: string, password: string) : void {
+    this.authString = btoa(username +':'+ password);
+  }
+
+  public loadAuthString() : Promise<void> {
+    return new Promise((resolve) => {
       this.storage.get('authString')
       .then((val) => {
         this.authString = val;
-        resolve('loaded!');
+        resolve();
       })
     })
   }

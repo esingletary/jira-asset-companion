@@ -4,6 +4,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { AuthProvider } from '../../providers/auth/auth';
 
+import { LoginPage } from '../login/login';
+
 import { User } from '../../models/user';
 
 @IonicPage()
@@ -30,7 +32,7 @@ export class SearchPage {
 
   public onLogoutSubmit() : void {
     this.auth.destroyAuth();
-    this.navCtrl.popToRoot();
+    this.navCtrl.setRoot(LoginPage,{},{animate: true, direction: 'back'});
   }
 
   public activateScanner() : void {

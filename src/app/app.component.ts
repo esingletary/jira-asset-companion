@@ -4,14 +4,25 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HeaderColor } from '@ionic-native/header-color';
 
+import { AuthProvider } from '../providers/auth/auth';
+
 import { LoginPage } from '../pages/login/login';
+import { SearchPage } from '../pages/search/search';
 @Component({
   templateUrl: 'app.html'
 })
 export class App {
-  rootPage:any = LoginPage;
+  rootPage: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, headerColor: HeaderColor) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, headerColor: HeaderColor, auth: AuthProvider) {
+    auth.loadAuthString().then(() => {
+      if (auth.isAuthenticated()) {
+        this.rootPage = SearchPage;
+      } else {
+        this.rootPage = LoginPage;
+      }
+    })
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

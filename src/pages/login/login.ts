@@ -28,18 +28,6 @@ export class LoginPage {
       remember: ['false']
     });
     localStorage.clear();
-    auth.loadAuthString()
-      .then(() => {
-        if (auth.isAuthenticated()) {
-          let credentials = atob(auth.getAuthString()).split(':::');
-          this.form.patchValue({
-            username: credentials[0],
-            password: credentials[1],
-            remember: true
-          });
-          credentials = null;
-        }
-      });
   }
 
   public onLoginSubmit() : void {
@@ -59,11 +47,10 @@ export class LoginPage {
           if (!this.auth.isAuthenticated() && this.form.get('remember').value === true) {
             this.auth.storeCredentials(this.form.get('username').value, this.form.get('password').value);
           }
-          this.auth.cacheCredentials(this.form.get('username').value, this.form.get('password').value);
+          this.auth.setAuthString(this.form.get('username').value, this.form.get('password').value);
           this.form.reset();
           this.moveToMainPage(this.user);
       }, err => {
-        console.log(this.form.get('password').value)
         this.errors = 'Invalid username or password';
       });
     } else {
@@ -73,5 +60,6 @@ export class LoginPage {
 
   public moveToMainPage(user) : void {
     this.navCtrl.push(SearchPage, user);
+    this.navCtrl.setRoot(SearchPage);
   }
 }
