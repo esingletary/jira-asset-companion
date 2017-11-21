@@ -11,8 +11,7 @@ export class AuthProvider {
 
   private user : User;
 
-  constructor(public http: HttpClient, private storage: Storage) {
-  }
+  constructor(public http: HttpClient, private storage: Storage) {}
 
   public storeCredentials(username : string, password : string, user: User): void {
     let credentials = btoa(username +':'+ password);

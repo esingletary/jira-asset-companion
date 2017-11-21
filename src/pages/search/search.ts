@@ -24,11 +24,9 @@ export class SearchPage {
     private barcodeScanner: BarcodeScanner) {
 
       this.user = this.auth.getUser();
-
   }
 
-  ionViewDidLoad() {
-  }
+  ionViewDidLoad() {}
 
   public onLogoutSubmit(): void {
     this.auth.destroyAuth();

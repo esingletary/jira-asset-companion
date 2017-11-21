@@ -56,6 +56,7 @@ export class LoginPage {
           this.moveToMainPage();
       }, err => {
         this.errors = 'Invalid username or password';
+        loading.dismiss();
       });
     } else {
       this.errors = 'Please enter a username and password';
