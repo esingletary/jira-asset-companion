@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { AuthProvider } from '../auth/auth';
-import { Observable } from 'rxjs/Observable';
+
+import { Issue } from '../../models/issue'
 
 @Injectable()
 export class JiraProvider {
@@ -23,8 +25,8 @@ export class JiraProvider {
       .set('Authorization', `Basic ${this.auth.getAuthString()}`)});
   }
 
-  public getIssue(key: string): Observable<Object> {
-    return this.http.get(`${this.urlString}/issue/${key}`, {headers: new HttpHeaders()
+  public getIssue(key: string): Observable<Issue> {
+    return this.http.get<Issue>(`${this.urlString}/issue/${key}`, {headers: new HttpHeaders()
       .set('Authorization', `Basic ${this.auth.getAuthString()}`)});
   }
 }

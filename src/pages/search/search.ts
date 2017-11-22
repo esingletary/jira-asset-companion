@@ -3,10 +3,12 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { AuthProvider } from '../../providers/auth/auth';
+import { JiraProvider } from '../../providers/jira/jira';
 
 import { LoginPage } from '../login/login';
 
 import { User } from '../../models/user';
+import { Issue } from '../../models/issue';
 
 @IonicPage()
 @Component({
@@ -21,9 +23,14 @@ export class SearchPage {
   constructor(
     public navCtrl: NavController,
     private auth: AuthProvider,
+    private jira: JiraProvider,
     private barcodeScanner: BarcodeScanner) {
 
       this.user = this.auth.getUser();
+
+      this.jira.getIssue('ITAM-225').subscribe((issue) => {
+        console.log(issue.fields.labels);
+      })
   }
 
   ionViewDidLoad() {}
@@ -52,4 +59,6 @@ export class SearchPage {
       return urlArray[urlArray.length -1];
     }
   }
+
+
 }

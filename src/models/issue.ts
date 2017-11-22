@@ -1,36 +1,57 @@
 export interface Issue {
-  id: number;
+  id: string;
   key: string;
-  summary: string;
-  status?: string;
-  issue_type?: string;
-  labels?: string;
-  resolution?: string;
+  self: string;
+  fields: {
+    summary: string;
+    customfield_10300?: string; // Hostname
+    customfield_10501?: string; // Static IP
+    customfield_10500?: { // Tier of Equipment
+      value: string;
+      id: string;
+    };
+    customfield_10101?: { // Location
+      value: string;
+      id: string;
+      child: {
+        value: string;
+        id: string;
+      }
+    };
+    customfield_10105?: string; // Room Number
+    customfield_10103?: string; // Date Purchased
+    description?: string;
+    labels?: string[];
 
-  manufacturer?: string;
-  model?: string;
-  serial_number?: string;
-  tier_of_equip?: string;
-  location?: string;
-  room_num?: string;
+    customfield_10307?: string; // Manufacturer
+    customfield_10306?: string; // Model
+    customfield_10102?: string; // Serial Number
+    customfield_10308?: string; // CPU Model
+    customfield_10304?: string; // RAM
+    customfield_10305?: string; // HDD Size
+    customfield_10309?: string; // Graphics Card
+    customfield_10312?: string; // LAN MAC Address
+    customfield_10313?: string; // WLAN MAC Address
+    customfield_10303?: string[]; // Device ports
 
-  assignee_name?: string;
-  assignee_displayName?: string;
-  assignee_emailAddress?: string;
-  assignee_avatarUrl?: string;
-}
+    customfield_10106?: string; // Screen Size
+    customfield_10301?: { // Aspect Ratio
+      value: string;
+      id: string;
+    };
+    customfield_10302?: { // Native Resolution
+      value: string;
+      id: string;
+    };
+    customfield_10310?: { // Current Connection
+      value: string;
+      id: string;
+    };
 
-export interface Printer extends Issue {
-  type_of_ink: string;
-  num_of_trays: string;
-}
+    customfield_10314?: string; // Lamp Model
+    customfield_10315?: string; // Lamp Life
 
-export interface Computer extends Issue {
-  hostname: string;
-  cpu_model: string;
-  ram: string;
-  hdd_size: string;
-  graphics_card: string;
-  lan_mac_address: string;
-  wlan_mac_address: string;
+    customfield_10317?: string; // Type of Ink/Toner
+    customfield_10316?: string; // Number of Trays
+  }
 }
