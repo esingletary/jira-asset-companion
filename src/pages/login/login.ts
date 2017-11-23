@@ -55,7 +55,11 @@ export class LoginPage {
           this.form.reset();
           this.moveToMainPage();
       }, err => {
-        this.errors = 'Invalid username or password';
+        if (err.status == '401') {
+          this.errors = 'Invalid username or password';
+        } else {
+          this.errors = 'An error has occured. Try again later.';
+        }
         loading.dismiss();
       });
     } else {

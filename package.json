@@ -47,7 +47,7 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.0",
+    "@ionic/app-scripts": "^3.1.2",
     "typescript": "2.4.2"
   },
   "description": "Asset Companion allows you to more easily modify and manipulate assets.",

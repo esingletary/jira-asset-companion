@@ -15,17 +15,18 @@ import { LoginPage } from '../pages/login/login';
 import { SearchPage } from '../pages/search/search'
 import { JiraProvider } from '../providers/jira/jira';
 import { AuthProvider } from '../providers/auth/auth';
+import { SearchPageModule } from '../pages/search/search.module';
 
 @NgModule({
   declarations: [
     App,
-    LoginPage,
-    SearchPage
+    LoginPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SearchPageModule,
     IonicModule.forRoot(App),
     IonicStorageModule.forRoot()
   ],
