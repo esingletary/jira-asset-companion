@@ -21,6 +21,7 @@ export class App {
       } else {
         this.rootPage = LoginPage;
       }
+      setTimeout(() => splashScreen.hide(), 500);
     });
 
     platform.ready().then(() => {
@@ -28,7 +29,6 @@ export class App {
       // Here you can do any higher level native things you might need.
       statusBar.styleLightContent();
       headerColor.tint('#0052cc');
-      splashScreen.hide();
     });
   }
 }
