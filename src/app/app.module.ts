@@ -12,10 +12,14 @@ import { HeaderColor } from '@ionic-native/header-color';
 
 import { App } from './app.component';
 import { LoginPage } from '../pages/login/login';
-import { SearchPage } from '../pages/search/search'
+
 import { JiraProvider } from '../providers/jira/jira';
 import { AuthProvider } from '../providers/auth/auth';
+
+import { SearchPage } from '../pages/search/search';
+import { AssetPage } from '../pages/asset/asset';
 import { SearchPageModule } from '../pages/search/search.module';
+import { AssetPageModule } from '../pages/asset/asset.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { SearchPageModule } from '../pages/search/search.module';
     HttpClientModule,
     ReactiveFormsModule,
     SearchPageModule,
+    AssetPageModule,
     IonicModule.forRoot(App),
     IonicStorageModule.forRoot()
   ],
@@ -34,7 +39,8 @@ import { SearchPageModule } from '../pages/search/search.module';
   entryComponents: [
     App,
     LoginPage,
-    SearchPage
+    SearchPage,
+    AssetPage
   ],
   providers: [
     StatusBar,

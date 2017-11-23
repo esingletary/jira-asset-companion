@@ -27,10 +27,6 @@ export class SearchPage {
     private barcodeScanner: BarcodeScanner) {
 
       this.user = this.auth.getUser();
-
-      // this.jira.getIssue('ITAM-225').subscribe((issue) => {
-      //   console.log(issue.fields.labels);
-      // });
   }
 
   ionViewDidLoad() {}
