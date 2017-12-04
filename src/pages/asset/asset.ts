@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Issue, IssueDetails, IssueBasics, HardwareDetails, ScreenDetails, PrinterDetails, ProjectorDetails } from '../../models/issue';
+import { Issue } from '../../models/issue';
 
 @IonicPage()
 @Component({
@@ -17,10 +17,10 @@ export class AssetPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.issue = navParams.get('issueDetails');
+    console.log(this.issue);
     this.issueType = this.issue.fields.issuetype.name;
     this.issueDetails = 'basics';
     this.lozengeColor = this.getLozengeColor(this.issue.fields.status.name.toLowerCase())
-
   }
 
   ionViewDidLoad() {}

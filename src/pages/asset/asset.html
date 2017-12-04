@@ -7,7 +7,7 @@
 <ion-content>
 
   <p style="font-weight: bold">{{issue?.fields.summary}}</p>
-  <p>{{issue?.fields.issuetype.name}}</p>
+  <p class="issueType"><img src="{{issue?.fields.issuetype.iconUrl}}" alt=""> {{issue?.fields.issuetype.name}}</p>
   <p><ion-badge color="{{lozengeColor}}">{{issue?.fields.status.name.toUpperCase()}}</ion-badge></p>
   <p><ion-badge *ngFor="let label of issue.fields.labels">{{label}}</ion-badge></p>
 

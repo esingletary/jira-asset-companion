@@ -6,6 +6,7 @@ export interface Issue {
     summary: string;
     issuetype: {
       name: string;
+      iconUrl: string;
     };
     status: {
       name: string;
