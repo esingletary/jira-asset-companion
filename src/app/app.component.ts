@@ -16,10 +16,17 @@ import { SearchPage } from '../pages/search/search';
   templateUrl: 'app.html'
 })
 export class App {
-  @ViewChild('myNav') nav: NavController
+  @ViewChild('mycontent') nav: NavController
   rootPage: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, headerColor: HeaderColor, private auth: AuthProvider, private menu: MenuController) {
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    headerColor: HeaderColor,
+    private auth: AuthProvider,
+    private menu: MenuController,) {
+
     auth.loadFromStorage().then(() => {
       if (auth.isAuthenticated()) {
         this.rootPage = SearchPage;
