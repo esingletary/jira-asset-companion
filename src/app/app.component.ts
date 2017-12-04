@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Platform, Events } from 'ionic-angular';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -12,6 +10,8 @@ import { AuthProvider } from '../providers/auth/auth';
 import { LoginPage } from '../pages/login/login';
 import { SearchPage } from '../pages/search/search';
 
+import { User } from '../models/user';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,13 +19,17 @@ export class App {
   @ViewChild('mycontent') nav: NavController
   rootPage: any;
 
+  user: User;
+
   constructor(
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     headerColor: HeaderColor,
     private auth: AuthProvider,
-    private menu: MenuController,) {
+    private menu: MenuController,
+    public events: Events
+  ) {
 
     auth.loadFromStorage().then(() => {
       if (auth.isAuthenticated()) {
@@ -44,6 +48,10 @@ export class App {
       statusBar.styleLightContent();
       headerColor.tint('#0052cc');
     });
+
+    this.events.subscribe('user:set', (user) => {
+      this.user = user;
+    })
   }
 
   public onLogoutSubmit(): void {

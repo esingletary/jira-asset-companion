@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Events } from 'ionic-angular';
+
 
 import { User } from '../../models/user';
 
@@ -11,7 +13,7 @@ export class AuthProvider {
   private authString : string;
   private user : User;
 
-  constructor(public http: HttpClient, private storage: Storage) {}
+  constructor(public http: HttpClient, private storage: Storage, public events: Events) {}
 
   public storeCredentials(username : string, password : string, user: User): void {
     let credentials = btoa(username +':'+ password);
@@ -29,7 +31,10 @@ export class AuthProvider {
 
   public getUser(): User {return this.user};
 
-  public setUser(user: User): void {this.user = user};
+  public setUser(user: User): void {
+    this.user = user;
+    this.events.publish('user:set', this.getUser());
+  };
 
   public loadFromStorage(): Promise<void> {
     return new Promise((resolve) => {
@@ -38,6 +43,7 @@ export class AuthProvider {
           this.authString = value;
         } else if (key == 'user') {
           this.user = JSON.parse(value);
+          this.events.publish('user:set', this.getUser());
         }
       }).then(() => {
         resolve();

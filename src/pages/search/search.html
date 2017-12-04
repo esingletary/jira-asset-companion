@@ -1,16 +1,25 @@
 <ion-header>
     <ion-navbar>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </button>
       <ion-title>Search</ion-title>
     </ion-navbar>
   </ion-header>
 
 <ion-content padding>
-  <p>Hello there {{user?.displayName}}</p>
-    <form (submit)="activateScanner()">
-        <button ion-button type="submit">Scan Code</button>
-      </form>
-    <form (submit)="onLogoutSubmit()">
-      <button ion-button type="submit">Log out</button>
-    </form>
-    {{data}}
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <p>Please enter an asset number or scan a tag</p>
+        <form [formGroup]="form" (submit)="submitTag()">
+          <ion-input formControlName="assetNum" type="text" placeholder="ITAM"></ion-input>
+          <button ion-button type="submit">Enter Number</button>
+        </form>
+        <form (submit)="activateScanner()">
+          <button ion-button type="submit">Scan Tag</button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

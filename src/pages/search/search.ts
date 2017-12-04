@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
 import { IonicPage, NavController } from 'ionic-angular';
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { AuthProvider } from '../../providers/auth/auth';
@@ -9,7 +12,6 @@ import { LoginPage } from '../login/login';
 
 import { User } from '../../models/user';
 import { Issue } from '../../models/issue';
-import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
 @IonicPage()
 @Component({
@@ -18,31 +20,32 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
 })
 export class SearchPage {
 
+  private form : FormGroup;
   data: any;
   user: User;
 
   constructor(
     public navCtrl: NavController,
     public menu: MenuController,
+    private formBuilder: FormBuilder,
     private auth: AuthProvider,
     private jira: JiraProvider,
-    private barcodeScanner: BarcodeScanner) {
+    private barcodeScanner: BarcodeScanner
+  ) {
 
-      this.user = this.auth.getUser();
+    this.form = this.formBuilder.group({
+      assetNum: ['ITAM-', Validators.required]
+    });
+
+    this.user = this.auth.getUser();
   }
 
   ionViewDidLoad() {}
 
-  public onLogoutSubmit(): void {
-    this.auth.destroyAuth();
-    this.menu.enable(false, 'profile-menu');
-    this.navCtrl.setRoot(LoginPage,{},{animate: true, direction: 'back'});
-  }
-
   public activateScanner(): void {
     this.barcodeScanner.scan().then((barcodeData) => {
       let scan = this.parseUrl(barcodeData.text);
-      this.data = scan;
+      this.form.patchValue({'assetNum': scan})
     }, (err) => {
          this.data = err;
     });

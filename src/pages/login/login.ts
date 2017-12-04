@@ -21,7 +21,13 @@ export class LoginPage {
   user : User;
   errors : string;
 
-  constructor(public navCtrl: NavController, private jira: JiraProvider, private formBuilder: FormBuilder, private auth : AuthProvider, public loadingCtrl: LoadingController, public menu:MenuController
+  constructor(
+    public navCtrl: NavController,
+    private jira: JiraProvider,
+    private formBuilder: FormBuilder,
+    private auth : AuthProvider,
+    public loadingCtrl: LoadingController,
+    public menu:MenuController
   ) {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
