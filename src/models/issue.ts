@@ -10,6 +10,18 @@ export interface Issue {
     };
     status: {
       name: string;
+    };
+    assignee: {
+      displayName: string;
+    };
+    comment: {
+      comments: {
+        author: {
+          displayName: string;
+        };
+        body: string;
+        created: string;
+      }
     }
     customfield_10300?: string; // Hostname
     customfield_10501?: string; // Static IP

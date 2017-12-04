@@ -9,11 +9,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AuthProvider } from '../../providers/auth/auth';
 import { JiraProvider } from '../../providers/jira/jira';
 
-import { LoginPage } from '../login/login';
 import { AssetPage } from '../asset/asset';
 
 import { User } from '../../models/user';
-import { Issue } from '../../models/issue';
 
 @IonicPage()
 @Component({

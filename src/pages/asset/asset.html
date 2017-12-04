@@ -7,6 +7,7 @@
 <ion-content>
 
   <p style="font-weight: bold">{{issue?.fields.summary}}</p>
+  <p>{{issue?.fields.assignee.displayName}}</p>
   <p class="issueType"><img src="{{issue?.fields.issuetype.iconUrl}}" alt=""> {{issue?.fields.issuetype.name}}</p>
   <p><ion-badge color="{{lozengeColor}}">{{issue?.fields.status.name.toUpperCase()}}</ion-badge></p>
   <p><ion-badge *ngFor="let label of issue.fields.labels">{{label}}</ion-badge></p>
@@ -60,4 +61,13 @@
       <ion-item *ngIf="issue.fields.customfield_10316">Number of Trays: {{issue?.fields.customfield_10316}}</ion-item>
     </ion-item-group>
   </div>
+  <h4 padding>Comments</h4>
+  <ion-card *ngFor="let comment of issue.fields.comment.comments">
+      <ion-card-header>
+        {{comment.author.displayName}} ({{parseDate(comment.created)}})
+      </ion-card-header>
+      <ion-card-content>
+        {{comment.body}}
+      </ion-card-content>
+    </ion-card>
 </ion-content>

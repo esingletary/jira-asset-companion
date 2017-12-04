@@ -32,4 +32,9 @@ export class AssetPage {
       return 'jira-yellow'
     }
   }
+
+  public parseDate(dateString: string): string {
+    let date = new Date(dateString);
+    return date.toDateString();
+  }
 }
