@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular'
+import { LoadingController } from 'ionic-angular';
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { JiraProvider } from '../../providers/jira/jira';
@@ -20,7 +21,7 @@ export class LoginPage {
   user : User;
   errors : string;
 
-  constructor(public navCtrl: NavController, private jira: JiraProvider, private formBuilder: FormBuilder, private auth : AuthProvider, public loadingCtrl: LoadingController
+  constructor(public navCtrl: NavController, private jira: JiraProvider, private formBuilder: FormBuilder, private auth : AuthProvider, public loadingCtrl: LoadingController, public menu:MenuController
   ) {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
@@ -69,5 +70,6 @@ export class LoginPage {
 
   public moveToMainPage(): void {
     this.navCtrl.setRoot(SearchPage, {}, {animate: true, direction: 'forward'});
+    this.menu.enable(true, 'profile-menu');
   }
 }

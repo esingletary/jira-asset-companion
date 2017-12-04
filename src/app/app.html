@@ -1,1 +1,11 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="mycontent" id="profile-menu">
+  <ion-content>
+    <ion-list>
+      <form (submit)="onLogoutSubmit()">
+        <button ion-button type="submit">Log out</button>
+      </form>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

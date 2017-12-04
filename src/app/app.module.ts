@@ -18,6 +18,7 @@ import { AuthProvider } from '../providers/auth/auth';
 
 import { SearchPage } from '../pages/search/search';
 import { AssetPage } from '../pages/asset/asset';
+
 import { SearchPageModule } from '../pages/search/search.module';
 import { AssetPageModule } from '../pages/asset/asset.module';
 

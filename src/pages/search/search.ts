@@ -9,6 +9,7 @@ import { LoginPage } from '../login/login';
 
 import { User } from '../../models/user';
 import { Issue } from '../../models/issue';
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
 @IonicPage()
 @Component({
@@ -22,6 +23,7 @@ export class SearchPage {
 
   constructor(
     public navCtrl: NavController,
+    public menu: MenuController,
     private auth: AuthProvider,
     private jira: JiraProvider,
     private barcodeScanner: BarcodeScanner) {
@@ -33,6 +35,7 @@ export class SearchPage {
 
   public onLogoutSubmit(): void {
     this.auth.destroyAuth();
+    this.menu.enable(false, 'profile-menu');
     this.navCtrl.setRoot(LoginPage,{},{animate: true, direction: 'back'});
   }
 

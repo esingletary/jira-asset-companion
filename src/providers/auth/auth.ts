@@ -4,11 +4,11 @@ import { Storage } from '@ionic/storage';
 
 import { User } from '../../models/user';
 
+
 @Injectable()
 export class AuthProvider {
 
   private authString : string;
-
   private user : User;
 
   constructor(public http: HttpClient, private storage: Storage) {}
@@ -19,25 +19,17 @@ export class AuthProvider {
     this.storage.set('user', JSON.stringify(user));
   }
 
-  public isAuthenticated(): boolean {
-    return this.authString != null;
-  }
+  public isAuthenticated(): boolean {return this.authString != null};
 
-  public getAuthString(): string {
-    return this.authString;
-  }
+  public getAuthString(): string  {return this.authString};
 
   public setAuthString(username: string, password: string): void {
     this.authString = btoa(username +':'+ password);
   }
 
-  public getUser() : User {
-    return this.user;
-  }
+  public getUser(): User {return this.user};
 
-  public setUser(user: User): void {
-    this.user = user;
-  }
+  public setUser(user: User): void {this.user = user};
 
   public loadFromStorage(): Promise<void> {
     return new Promise((resolve) => {
