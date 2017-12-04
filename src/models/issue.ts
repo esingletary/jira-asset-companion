@@ -4,6 +4,12 @@ export interface Issue {
   self: string;
   fields: {
     summary: string;
+    issuetype: {
+      name: string;
+    };
+    status: {
+      name: string;
+    }
     customfield_10300?: string; // Hostname
     customfield_10501?: string; // Static IP
     customfield_10500?: { // Tier of Equipment
@@ -23,8 +29,8 @@ export interface Issue {
     description?: string;
     labels?: string[];
 
-    customfield_10307?: string; // Manufacturer
-    customfield_10306?: string; // Model
+    customfield_10306?: string; // Manufacturer
+    customfield_10307?: string; // Model
     customfield_10102?: string; // Serial Number
     customfield_10308?: string; // CPU Model
     customfield_10304?: string; // RAM
