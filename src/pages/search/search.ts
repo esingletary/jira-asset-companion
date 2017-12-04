@@ -3,12 +3,14 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { IonicPage, NavController } from 'ionic-angular';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
+import { LoadingController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { JiraProvider } from '../../providers/jira/jira';
 
 import { LoginPage } from '../login/login';
+import { AssetPage } from '../asset/asset';
 
 import { User } from '../../models/user';
 import { Issue } from '../../models/issue';
@@ -28,6 +30,7 @@ export class SearchPage {
     public navCtrl: NavController,
     public menu: MenuController,
     private formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController,
     private auth: AuthProvider,
     private jira: JiraProvider,
     private barcodeScanner: BarcodeScanner
@@ -60,6 +63,23 @@ export class SearchPage {
     } else {
       return urlArray[urlArray.length -1];
     }
+  }
+
+  public onSearchSubmit(): void {
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    let assetNumber = this.form.get('assetNum').value;
+    this.jira.getIssue(assetNumber).subscribe(
+      (issue) => {
+        let issueDetails = issue;
+        loading.dismiss();
+        this.navCtrl.push(AssetPage, {
+          issueDetails: issueDetails
+        });
+    }, (err) => {
+      this.data = err.status;
+      loading.dismiss();
+    });
   }
 
 

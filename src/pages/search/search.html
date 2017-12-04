@@ -12,13 +12,14 @@
     <ion-row>
       <ion-col>
         <p>Please enter an asset number or scan a tag</p>
-        <form [formGroup]="form" (submit)="submitTag()">
+        <form [formGroup]="form" (submit)="onSearchSubmit()">
           <ion-input formControlName="assetNum" type="text" placeholder="ITAM"></ion-input>
-          <button ion-button type="submit">Enter Number</button>
+          <button ion-button type="submit">Search for Asset</button>
         </form>
         <form (submit)="activateScanner()">
           <button ion-button type="submit">Scan Tag</button>
         </form>
+        {{data}}
       </ion-col>
     </ion-row>
   </ion-grid>
