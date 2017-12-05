@@ -21,8 +21,8 @@ export interface Issue {
         };
         body: string;
         created: string;
-      }
-    }
+      };
+    };
     customfield_10300?: string; // Hostname
     customfield_10501?: string; // Static IP
     customfield_10500?: { // Tier of Equipment
@@ -35,13 +35,12 @@ export interface Issue {
       child: {
         value: string;
         id: string;
-      }
+      };
     };
     customfield_10105?: string; // Room Number
     customfield_10103?: string; // Date Purchased
     description?: string;
     labels?: string[];
-
     customfield_10306?: string; // Manufacturer
     customfield_10307?: string; // Model
     customfield_10102?: string; // Serial Number
@@ -52,7 +51,6 @@ export interface Issue {
     customfield_10312?: string; // LAN MAC Address
     customfield_10313?: string; // WLAN MAC Address
     customfield_10303?: string[]; // Device ports
-
     customfield_10106?: string; // Screen Size
     customfield_10301?: { // Aspect Ratio
       value: string;
@@ -66,10 +64,8 @@ export interface Issue {
       value: string;
       id: string;
     };
-
     customfield_10314?: string; // Lamp Model
     customfield_10315?: string; // Lamp Life
-
     customfield_10317?: string; // Type of Ink/Toner
     customfield_10316?: string; // Number of Trays
   }

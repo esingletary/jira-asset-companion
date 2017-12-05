@@ -15,9 +15,11 @@ export class AssetPage {
   issueDetails: string;
   lozengeColor: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
     this.issue = navParams.get('issueDetails');
-    console.log(this.issue);
     this.issueType = this.issue.fields.issuetype.name;
     this.issueDetails = 'basics';
     this.lozengeColor = this.getLozengeColor(this.issue.fields.status.name.toLowerCase())
@@ -25,7 +27,8 @@ export class AssetPage {
 
   ionViewDidLoad() {}
 
-  public getLozengeColor(status: string) {
+  // This retrieves the color of the status lozenge (the little pill)
+  public getLozengeColor(status: string): string {
     if (status == 'deployed') {
       return 'jira-green'
     } else {
@@ -33,8 +36,8 @@ export class AssetPage {
     }
   }
 
+  // Parse Jira's date string to something more readable
   public parseDate(dateString: string): string {
-    let date = new Date(dateString);
-    return date.toDateString();
+    return new Date(dateString).toDateString();
   }
 }

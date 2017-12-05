@@ -9,18 +9,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { HeaderColor } from '@ionic-native/header-color';
+import { Dialogs } from '@ionic-native/dialogs'
 
 import { App } from './app.component';
-import { LoginPage } from '../pages/login/login';
 
+// Pages and their modules
+import { LoginPage } from '../pages/login/login';
+import { SearchPage } from '../pages/search/search';
+import { SearchPageModule } from '../pages/search/search.module';
+import { AssetPage } from '../pages/asset/asset';
+import { AssetPageModule } from '../pages/asset/asset.module';
+
+// Providers
 import { JiraProvider } from '../providers/jira/jira';
 import { AuthProvider } from '../providers/auth/auth';
-
-import { SearchPage } from '../pages/search/search';
-import { AssetPage } from '../pages/asset/asset';
-
-import { SearchPageModule } from '../pages/search/search.module';
-import { AssetPageModule } from '../pages/asset/asset.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { AssetPageModule } from '../pages/asset/asset.module';
     SplashScreen,
     BarcodeScanner,
     HeaderColor,
+    Dialogs,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     JiraProvider,
     AuthProvider

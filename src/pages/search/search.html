@@ -11,12 +11,12 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <p>Please enter an asset number or scan a tag</p>
-        <form [formGroup]="form" (submit)="onSearchSubmit()">
+        <p>Please scan or enter an asset tag</p>
+        <form [formGroup]="form" (submit)="submitSearch()">
           <ion-input formControlName="assetNum" type="text" placeholder="ITAM"></ion-input>
           <button ion-button type="submit">Search for Asset</button>
         </form>
-        <form (submit)="activateScanner()">
+        <form *ngIf="this.platform.is('cordova')" (submit)="activateScanner()">
           <button ion-button type="submit">Scan Tag</button>
         </form>
         {{data}}

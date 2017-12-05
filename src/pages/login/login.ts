@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
-import { MenuController } from 'ionic-angular/components/app/menu-controller';
+import { NavController, LoadingController, MenuController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { JiraProvider } from '../../providers/jira/jira';
 import { AuthProvider } from '../../providers/auth/auth';
-
 import { SearchPage } from '../search/search';
-
 import { User } from '../../models/user';
 
 @Component({
@@ -23,9 +19,9 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    private jira: JiraProvider,
-    private formBuilder: FormBuilder,
-    private auth : AuthProvider,
+    public jira: JiraProvider,
+    public formBuilder: FormBuilder,
+    public auth : AuthProvider,
     public loadingCtrl: LoadingController,
     public menu:MenuController
   ) {
@@ -36,6 +32,7 @@ export class LoginPage {
     });
   }
 
+  // Submit the credentials for verification and return either success and move on, or return any erros.
   public onLoginSubmit(): void {
     if (this.form.valid) {
       let loading = this.loadingCtrl.create();
@@ -74,6 +71,7 @@ export class LoginPage {
     }
   }
 
+  // Set the root page and enable the slide menu.
   public moveToMainPage(): void {
     this.navCtrl.setRoot(SearchPage, {}, {animate: true, direction: 'forward'});
     this.menu.enable(true, 'profile-menu');
